@@ -1,0 +1,7 @@
+.git
+*.xlsx
+.vscode
+.pytest_cache
+dump.rdb
+.coverage
+.coverage

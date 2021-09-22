@@ -1,0 +1,31 @@
+version: '3.1'
+
+volumes:
+  data-db:
+
+services:
+  mongodb:
+    image: mongo:4.2
+    container_name: mongodb
+    restart: always
+    volumes:
+      - ./data-db:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    env_file:
+      - '.env_docker'
+    ports:
+      - 27017:27017
+
+  web:
+    build: .
+    env_file:
+      - '.env_docker'
+    command: bash -c "python /app/manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
