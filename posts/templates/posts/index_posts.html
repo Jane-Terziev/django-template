@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <a class="btn btn-success float-right mt-1 mb-1" href="{% url 'posts:create_post' %}">Create</a>
+    <table class="table table-bordered table-striped">
+    <thead class="table-header">
+    <th>Id</th>
+    <th>Title</th>
+    <th>Body</th>
+    </thead>
+    <tbody id="table-body">
+    {% for post in posts %}
+        <tr>
+        <td>{{ post.id }}</td>
+         <td>{{ post.title }}</td>
+         <td>{{ post.body }}</td>
+        <td><a class='btn btn-success' href="{% url 'posts:edit_post' id=post.id %}">Edit</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
