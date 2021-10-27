@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'posts'
 ]
 
 MIDDLEWARE = [
@@ -33,7 +34,7 @@ ROOT_URLCONF = 'django_test_demo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR, 'templates') ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,9 +66,6 @@ DATABASES = {
             }
         }
     }
-
-print(DATABASES)
-
 
 
 # Password validation
@@ -106,7 +104,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'staticfiles')
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/'),
+]
 #
 # CELERY_BROKER_URL = os.environ.get('MONGODB_URI', default='mongodb://localhost:27017/django-test-demo')
 # CELERY_RESULT_BACKEND = os.environ.get('MONGODB_URI', default='mongodb://localhost:27017/django-test-demo')

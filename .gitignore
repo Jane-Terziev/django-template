@@ -112,3 +112,4 @@ venv1
 
 *.rdb
 media/
+.env
